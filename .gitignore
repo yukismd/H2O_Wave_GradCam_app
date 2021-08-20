@@ -1,6 +1,5 @@
 # ignore jupyter notebook backup folders
-.ipynb_checkpoints/
-python_api/.ipynb_checkpoints/
+.ipynb_checkpoints
 
 # ignore linux background log file
 nohup.out
@@ -10,3 +9,8 @@ nohup.out
 
 # ms power point files
 *.pptx
+
+# python lib files
+*.whl
+
+
