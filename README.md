@@ -22,5 +22,7 @@ $HOME/ --- wave-0.17.0-darwin-amd64/ (Wave SDK、Wave実行パス)
 #### 初期設定
 
 #### Appの開始
+1. command '$ bash run_app.sh'
+2. access "ip:10101/scoring" for Grad-CAM app. "ip:10101/sys" for monitoring app.
 
 #### モデルの追加
