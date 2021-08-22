@@ -7,14 +7,14 @@ Driverless AIで作成したImage ModelのPython Scoring Pipelineを利用した
 ### Directories and Files
 ```
 $HOME/ --- wave-0.17.0-darwin-amd64/ (Wave SDK、Wave実行パス)
-        |- wave_app/ --- app.py (Grad-CAM APP)
-                      |- env_wave0170 (Wave実行用Python仮想環境)
-        |- models/ --- model1/ --- scoring-pipeline/ (Driverless AIのPython Scoring Pipeline)
-                                |- data/ --- input_data/ (アップロードされるスコアリング用データ)
-                                          |- output_data/ (結果データ)
-                    |- model2/
-                    |- ...
-        |- run_app.sh (Appの開始)
+        |- H2O_Wave_GradCam_app --- wave_app/ --- app.py (Grad-CAM APP)
+                                               |- env_wave0170 (Wave実行用Python仮想環境)
+                                 |- models/ --- model1/ --- scoring-pipeline/ (Driverless AIのPython Scoring Pipeline)
+                                                         |- data/ --- input_data/ (アップロードされるスコアリング用データ)
+                                                         |- output_data/ (結果データ)
+                                             |- model2/
+                                             |- ...
+                                 |- run_app.sh (Appの開始)
 ```
 
 ### 実行方法
