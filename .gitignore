@@ -18,4 +18,4 @@ wave_app/env_wave0170
 wave_app/__pycache__
 
 # models and data under models
-models/
+models
