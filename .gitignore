@@ -16,6 +16,7 @@ nohup.out
 # unnecessary files in wave app dir
 wave_app/env_wave0170
 wave_app/__pycache__
+wave_app/tmp
 
 # models and data under models
 models

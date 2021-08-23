@@ -13,22 +13,26 @@ import pandas as pd
 import numpy as np
 
 
+proj_folder = 'H2O_Wave_GradCam_app'
 
 """
 q.client.model_selected
 q.client.selected_model
-q.client.model_path
-q.client.data_path_input : '../models/art_age/data/input_data'
-q.client.data_path_input_folder : zipから展開したフォルダ名 '../models/art_age/data/input_data/sample1'
-q.client.data_path_output : '../models/art_age/data/output_data'
-q.client.data_path_output_folder : 結果の保存先 '../models/art_age/data/output_data/sample1'
+q.client.model_path : '/home/ubuntu/H2O_Wave_GradCam_app/models/art_age'
+q.client.data_path_input : '/home/ubuntu/H2O_Wave_GradCam_app/models/art_age/data/input_data'
+q.client.data_path_input_folder : zipから展開したフォルダ名 '/home/ubuntu/H2O_Wave_GradCam_app/models/art_age/data/input_data/sample_image_art_age'
+q.client.data_path_output : '/home/ubuntu/H2O_Wave_GradCam_app/models/art_age/data/output_data'
+q.client.data_path_output_folder : 結果の保存先 '/home/ubuntu/H2O_Wave_GradCam_app/models/art_age/data/output_data/sample_image_art_age'
 """
 
-def run_python_scoring_pipeline():
+def run_python_scoring_pipeline(model_path, data_path_input_folder, data_path_output_folder):
     """ model_path上のPythonScoringPipelineを実行
     """
     #(todo) data_path_input_folder内の写真をスコアリング
     # data_path_output上に結果（GradCAM Image folder, 予測結果csv）が保存される
+
+    # 引数: データパス、結果パス
+    subprocess.run(['bash', 'dai_py_scoring/do_py_scoring.sh', model_path, data_path_input_folder, data_path_output_folder])
 
     return 'Scoring Done!!!'
 
@@ -43,7 +47,7 @@ async def serve(q: Q):
     )
 
     if not q.client.model_selected:    # 初期画面。モデル選択前
-        list_model_path = os.listdir(os.path.join('..', 'models'))    # modelsディレクトリのモデル一覧
+        list_model_path = os.listdir(os.path.join(os.environ['HOME'], proj_folder, 'models'))    # modelsディレクトリのモデル一覧
         choices = [ui.choice(mod, mod) for mod in list_model_path]
         q.page['card_model_select'] = ui.form_card(
             box='1 2 2 10',    # x座標 y座標 幅 高さ
@@ -71,7 +75,7 @@ async def model_selected(q: Q):
     del q.page['card_model_select'], q.page['card_result']
     q.client.model_selected = True
     q.client.selected_model = q.args.button_selected_model
-    q.client.model_path = os.path.join('..', 'models', q.client.selected_model)
+    q.client.model_path = os.path.join(os.environ['HOME'], proj_folder, 'models', q.client.selected_model)
     q.client.data_path_input = os.path.join(q.client.model_path, 'data', 'input_data')
     os.makedirs(q.client.data_path_input, exist_ok=True)
     q.client.data_path_output = os.path.join(q.client.model_path, 'data', 'output_data')
@@ -110,7 +114,7 @@ async def do_scoring(q: Q):
     q.client.data_path_output_folder = os.path.join(q.client.data_path_output, os.path.splitext(os.path.basename(local_path_zip))[0])  # 結果保存用（上と同じフォルダ名で作成）
     os.makedirs(q.client.data_path_output_folder, exist_ok=True)
 
-    res = run_python_scoring_pipeline()   # PyScoringの実行
+    res = run_python_scoring_pipeline(q.client.model_path, q.client.data_path_input_folder, q.client.data_path_output_folder)   # PyScoringの実行
     print(res)
 
     q.page['card_result'] = ui.form_card(
