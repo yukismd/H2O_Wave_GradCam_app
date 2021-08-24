@@ -9,12 +9,14 @@ import numpy as np
 import pandas as pd
 
 
-model_path = sys.argv[1]   # スコアリング用データのパス
-data_path_input_folder = sys.argv[2]
-data_path_output_folder = sys.argv[3]
+model_path = sys.argv[1]
+data_path_input_folder = sys.argv[2]   # スコアリング用データのパス
+data_path_output_folder = sys.argv[3]   # 結果保存先
+data_path_output_folder_gradcam = sys.argv[4]   # 結果保存先（GradCAM）
 print(model_path)
 print(data_path_input_folder)
 print(data_path_output_folder)
+print(data_path_output_folder_gradcam)
 
 # モデル名
 for f in os.listdir(os.path.join(model_path, 'scoring-pipeline')):
@@ -24,15 +26,12 @@ for f in os.listdir(os.path.join(model_path, 'scoring-pipeline')):
 model_name = model_file_name.split('-')[0]
 print('model name >>>>> ', model_name)
 
+# Python Scoring Modelのimport
 my_model = import_module(model_name)
-print(my_model)
-print(my_model.Scorer)
-print(my_model.scorer._load_pickle_gz)
+#print(my_model)
+#print(my_model.Scorer)
+#print(my_model.scorer._load_pickle_gz)
 
-#from model_name import Scorer
-#from model_name.scorer import (
-#    _load_pickle_gz,
-#)
 from gradcam_inference import apply_gradcam_model
 
 
@@ -62,20 +61,30 @@ class GradCAMScorer(my_model.Scorer):
 
         return self.score_batch(input_frame, **kwargs)
 
-my_scorer = GradCAMScorer()
+gc_scorer = GradCAMScorer()
 
-score = my_scorer.score_gradcam(
-    [
-        "xxxxx.jpg"  # image
-    ],
-    '.',
-    apply_data_recipes=False,
-)
+col_name = gc_scorer.get_column_names()[0]   # 学習データで利用していた画像パスのカラム名
+print(gc_scorer.get_column_names())
+
+images = os.listdir(data_path_input_folder)
+image_list = [os.path.join(data_path_input_folder, img) for img in images]
+
+print('---------- Score Batch ----------')
+columns = [
+    pd.Series(image_list, name=col_name, dtype='object'),
+        ]
+df = pd.concat(columns, axis=1)
+
+start_time = time.time()
+res = gc_scorer.score_gradcam_batch(df, data_path_output_folder_gradcam, apply_data_recipes=False)
 end_time = time.time()
+print('------> Time spent for scoring: {}'.format(end_time - start_time))
 
-print(score)
+df_image = pd.DataFrame({'image_name':images})
+res = pd.concat([df_image, res], axis=1)
 
-#df = pd.DataFrame({'x1':[1,2,3], 'x2':[6,7,8]})
-#df.to_csv(os.path.join(model_path, 'test.csv'))
+print(res)   # pd.DataFrame
+
+res.to_csv(os.path.join(data_path_output_folder, 'result.csv'), index=False)
 
 print('<< End: run_gradcam.py >>')
