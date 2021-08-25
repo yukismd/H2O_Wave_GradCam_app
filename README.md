@@ -44,6 +44,6 @@ $HOME/ --- wave-0.17.0-darwin-amd64/ (Wave SDK、Wave実行パス)
 "Grad-CAM Scoring"アプリへのアクセスは、YourIP:10101/app  
 "System Monitoring"アプリへのアクセスは、YourIP:10101/sys
 
-### アップロード用スコアリング用データ
+### アップロード用スコアリングデータ
 フォルダの中に直接画像を入れ、zipファイルへ圧縮  
 サンプル： [sample_image_art_age.zip](sample_image_art_age.zip)
