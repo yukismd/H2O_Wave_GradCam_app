@@ -3,7 +3,7 @@
 ### About
 Driverless AIで作成したImage ModelのPython Scoring Pipelineを利用した、Grad-CAMの実行  
 画像ファイル一式をzip形式でアップし、スコアリングとGrad-CAMを実施  
-<img src=\"Grad-CAM-App.png\" width=800px>
+![Grad-CAM-App](img/Grad-CAM-App.png)
 
 ### 実行環境
 AWS EC2(Ubuntu Server 18.04 LTS, t2.large)
