@@ -18,7 +18,7 @@ print(data_path_input_folder)
 print(data_path_output_folder)
 print(data_path_output_folder_gradcam)
 
-# モデル名
+# モデル名の取得
 for f in os.listdir(os.path.join(model_path, 'scoring-pipeline')):
     if 'scoring_h2oai_experiment_' in f:
         model_file_name = f
@@ -27,10 +27,7 @@ model_name = model_file_name.split('-')[0]
 print('model name >>>>> ', model_name)
 
 # Python Scoring Modelのimport
-my_model = import_module(model_name)
-#print(my_model)
-#print(my_model.Scorer)
-#print(my_model.scorer._load_pickle_gz)
+my_model = import_module(model_name)   # import python_scoring_model_libと同じ
 
 from gradcam_inference import apply_gradcam_model
 

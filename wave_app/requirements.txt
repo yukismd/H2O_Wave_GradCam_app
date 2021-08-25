@@ -1,3 +1,4 @@
 h2o_wave==0.17.0
 pandas
 numpy
+psutil
