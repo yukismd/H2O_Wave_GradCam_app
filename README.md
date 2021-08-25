@@ -1,7 +1,7 @@
 # H2O Driverless AI Grad-CAM App
 
 ### About
-Driverless AIで作成したImage ModelのPython Scoring Pipelineを利用した、Grad-CAMの実行  
+Driverless AIで作成したImage ModelのPython Scoring Pipelineを利用した、Grad-CAMの実行アプリ  
 画像ファイル一式をzip形式でアップし、スコアリングとGrad-CAMを実施  
 ![Grad-CAM-App](./Grad-CAM-App.png)
 
@@ -38,8 +38,7 @@ $HOME/ --- wave-0.17.0-darwin-amd64/ (Wave SDK、Wave実行パス)
                                  |- run_app.sh
 ```
 
-
-### Appの開始
+### アプリの開始
 `$ cd ~/H2O_Wave_GradCam_app`  
 `$ bash run_app.sh` （アプリ開始用スクリプト）  
 "Grad-CAM Scoring"アプリへは、YourIP:10101/app  
