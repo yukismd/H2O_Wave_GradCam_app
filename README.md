@@ -31,7 +31,7 @@ $HOME/ --- wave-0.17.0-darwin-amd64/ (Wave SDK、Wave実行パス)
                                                |- env_wave0170 (Wave実行用Python仮想環境)
                                                |- dai_py_scoring --- do_py_scoring.sh
                                                                   |- run_gradcam.py
-                                                                  |- run_gradcam.py
+                                                                  |- gradcam_inference.py
                                  |- models/ --- model1/ --- scoring-pipeline/ (Driverless AIのPython Scoring Pipeline)
                                              |- model2/
                                              |- ...
