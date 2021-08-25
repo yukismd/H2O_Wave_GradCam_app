@@ -10,7 +10,8 @@ AWS EC2(Ubuntu Server 18.04 LTS, t2.large)
 ### 初期設定
 1. [Wave SDK](https://github.com/h2oai/wave/releases/tag/v0.17.0)のダウンロードし、Homeディレクトリ上に解凍
 2. 以下「実行に必要なディレクトリとファイル」のmodelsディレクトリとその下に任意のモデル名ディレクトリ（model1やmodel2）を作成
-3. ２で作成したモデル名ディレクトリ下に、Driverless AIで実行済みのExperimentからダウンロードしたPython Scoring Pipelineを配置、解凍（解凍後のフォルダ名はscoring-pipelineとなっている）
+    - 複数のモデルの配置が可能
+3. 2で作成したモデル名ディレクトリ下に、Driverless AIで実行済みのExperimentからダウンロードしたPython Scoring Pipelineを配置、解凍（解凍後のフォルダ名はscoring-pipelineとなっている）
 4. Python Scoring Pipeline環境の構築。[ドキュメント](https://docs.h2o.ai/driverless-ai/latest-stable/docs/userguide/scoring-standalone-python.html)に従い、scoring-pipelineディレクトリにて作業を実施
     - 本アプリでは、[Running the Python Scoring Pipeline - Alternative Method](https://docs.h2o.ai/driverless-ai/latest-stable/docs/userguide/scoring-standalone-python.html#quick-start-alternative-method)でのインストールを実施し、環境変数（DRIVERLESS_AI_LICENSE_KEY）にDriverless AIライセンスキーを登録
     - インストール方法によって、'do_py_scoring.sh'を修正
@@ -43,4 +44,3 @@ $HOME/ --- wave-0.17.0-darwin-amd64/ (Wave SDK、Wave実行パス)
 "Grad-CAM Scoring"アプリへは、YourIP:10101/app  
 "System Monitoring"アプリへは、YourIP:10101/sys
 
-#### モデルの追加
