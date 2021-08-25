@@ -39,9 +39,12 @@ $HOME/ --- wave-0.17.0-darwin-amd64/ (Wave SDK、Wave実行パス)
 ```
 
 
-#### Appの開始
+### Appの開始
 `$ cd ~/H2O_Wave_GradCam_app`  
 `$ bash run_app.sh` （アプリ開始用スクリプト）  
 "Grad-CAM Scoring"アプリへは、YourIP:10101/app  
 "System Monitoring"アプリへは、YourIP:10101/sys
 
+### アップロード用スコアリング用データ
+フォルダの中に直接画像を入れ、zipファイルへ圧縮  
+サンプル： [sample_image_art_age.zip](sample_image_art_age.zip)
